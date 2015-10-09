@@ -1,3 +1,4 @@
+////Nick Ferro
 //// X5:  collisions.
 //// (Assume ball diameter of 30.)
 
@@ -5,7 +6,7 @@
 
 String title=  "ELASTIC COLLISIONS";
 String news=   "Use 'r' key to reset.";
-String author=  "Your Name";
+String author=  "Nick Ferro";
 
 
 float left, right, top, bottom;
@@ -35,9 +36,9 @@ void setup() {
    yelX=  random( middle,right );   yelY=  random( top, bottom );
    bluX=  random( middle,right );   bluY=  random( top, bottom );
    // Random speeds
-   redDX=  random( 1,3 );   redDY=  random( 1,3 );
-   yelDX=  random( 1,3 );   redDY=  random( 1,3 );
-   bluDX=  random( 1,3 );   bluDY=  random( 1,3 );
+   redDX=  random( -5,5 );   redDY=  random( -5,5 );
+   yelDX=  random( -5,5 );   redDY=  random( -5,5 );
+   bluDX=  random( -5,5 );   bluDY=  random( -5,5 );
  }
 
 //// NEXT FRAME:  table, bounce off walls, collisions, show all
@@ -64,13 +65,40 @@ void table( float left, float top, float right, float bottom ) {
 //// ACTION:  bounce off walls, collisions
 void bounce() {
   redX += redDX;  if ( redX<left || redX>right ) redDX *= -1;
+  redY += redDY;  if ( redY<top || redY>bottom ) redDY *= -1;
+  yelX += yelDX;  if ( yelX<left || yelX>right ) yelDX *= -1;
+  yelY += yelDY;  if ( yelY<top || yelY>bottom ) yelDY *= -1;
+  bluX += bluDX;  if ( bluX<left || bluX>right ) bluDX *= -1;
+  bluY += bluDY;  if ( bluY<top || bluY>bottom ) bluDY *= -1;
+  cueX += cueDX;  if ( cueX<left || cueX>right ) cueDX *= -1;
+  cueY += cueDY;  if ( cueY<top || cueY>bottom ) cueDY *= -1;
 }
 void collisions() {
   float tmp;
   // Swap velocities!
-  if ( dist( redX,redY, yelX,yelY ) < 30 ) {
+  if ( dist( redX,redY, yelX,yelY ) < 30 ) {         //yellow and red
     tmp=yelDX;  yelDX=redDX;  redDX=tmp;
     tmp=yelDY;  yelDY=redDY;  redDY=tmp;
+  }
+  if ( dist( bluX,bluY, yelX,yelY ) < 30 ) {         //yellow and blu
+    tmp=yelDX;  yelDX=bluDX;  bluDX=tmp;
+    tmp=yelDY;  yelDY=bluDY;  bluDY=tmp;
+  }
+  if ( dist( redX,redY, bluX,bluY ) < 30 ) {         //blu and red
+    tmp=bluDX;  bluDX=redDX;  redDX=tmp;
+    tmp=bluDY;  bluDY=redDY;  redDY=tmp;
+  }
+  if ( dist( redX,redY, cueX,cueY ) < 30 ) {         //cue and red
+    tmp=cueDX;  cueDX=redDX;  redDX=tmp;
+    tmp=cueDY;  cueDY=redDY;  redDY=tmp;
+  }
+  if ( dist( cueX,cueY, yelX,yelY ) < 30 ) {         //cue and yel
+    tmp=cueDX;  cueDX=yelDX;  yelDX=tmp;
+    tmp=cueDY;  cueDY=yelDY;  yelDY=tmp;
+  }
+  if ( dist( cueX,cueY, bluX,bluY ) < 30 ) {         //cue and blu
+    tmp=bluDX;  bluDX=cueDX;  cueDX=tmp;
+    tmp=bluDY;  bluDY=cueDY;  cueDY=tmp;
   }
 }
 
@@ -83,6 +111,7 @@ void show() {
   fill( 255,255,255 );    ellipse( cueX,cueY, 30,30 );
 }
 void messages() {
+  fill(0);
   text( title, width/3, 20 );
   text( news, width/3, 40 );
   text( author, 10, height-10 );
