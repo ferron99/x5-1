@@ -36,6 +36,7 @@ void setup() {
    yelX=  random( middle,right );   yelY=  random( top, bottom );
    bluX=  random( middle,right );   bluY=  random( top, bottom );
    // Random speeds
+   cueDX= 0; cueDY= 0;
    redDX=  random( -5,5 );   redDY=  random( -5,5 );
    yelDX=  random( -5,5 );   redDY=  random( -5,5 );
    bluDX=  random( -5,5 );   bluDY=  random( -5,5 );
@@ -123,4 +124,12 @@ void keyPressed() {
   if (key == 'r') {
     reset();
   }
+}
+
+void mousePressed() {
+  strokeWeight(4);
+  line (mouseX, mouseY, cueX, cueY);
+  
+  cueDX= (cueX-mouseX) / 30;
+  cueDY= (cueY-mouseY) / 30;
 }
