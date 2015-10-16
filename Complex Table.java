@@ -1,3 +1,7 @@
+//Complex table shape test
+//Nick Ferro
+//10-16-2016
+
 float redX, redY, redDX, redDY;
 
 void setup(){
@@ -28,11 +32,15 @@ void bounce(){
   redX += redDX;
   if (redX>535) redDX *= -1;
   if (redX<65 && redY>315) redDX *= -1;
-  if (redX<315 && redY<315) redDX *= -1;
+  if(redY<300){
+    if (redX<315 && redY<315) redDX *= -1;
+  }
   redY += redDY;
   if (redY>535) redDY *= -1;
   if (redY<65 && redX>315) redDY *= -1;
-  if (redY<315 && redX<315) redDY *= -1;
+  if(redX<300){
+    if (redY<315 && redX<315) redDY *= -1;
+  }
 }
 
 void show() {
