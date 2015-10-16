@@ -38,7 +38,7 @@ void setup() {
    // Random speeds
    cueDX= 0; cueDY= 0;
    redDX=  random( -5,5 );   redDY=  random( -5,5 );
-   yelDX=  random( -5,5 );   redDY=  random( -5,5 );
+   yelDX=  random( -5,5 );   yelDY=  random( -5,5 );
    bluDX=  random( -5,5 );   bluDY=  random( -5,5 );
  }
 
