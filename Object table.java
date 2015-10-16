@@ -31,7 +31,7 @@ void setup() {
   fill( 100, 250, 100 );    // green pool table
   strokeWeight(20);
   stroke( 127, 0, 0 );      // Brown walls
-  rect( left-20, top-20, right+20, bottom+20 );
+  rect( left-24, top-24, right+24, bottom+24 );
   stroke(0);
   strokeWeight(1);
 }
